@@ -1,8 +1,6 @@
+import { ControlType } from '../models'
 import { FormControl } from './FormControl'
 
-type ControlType = {
-  [key: string]: FormControl | FormGroup
-}
 export class FormGroup {
   controls: ControlType
 

@@ -1,6 +1,6 @@
-import { FormGroup } from './FormGroup'
+import { ValidatorFunction } from '../models'
 import { FormControl } from './FormControl'
-import type { ValidatorFunction } from './Validators'
+import { FormGroup } from './FormGroup'
 
 export class FormBuilder {
   /**

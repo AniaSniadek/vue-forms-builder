@@ -1,9 +1,5 @@
-export type ValidationErrors = {
-  [key: string]: any
-}
-export interface ValidatorFunction {
-  (value: any): ValidationErrors | null
-}
+import { ValidationErrors, ValidatorFunction } from '../models'
+
 export class Validators {
   /**
    * Requires the control's value to be non-empty

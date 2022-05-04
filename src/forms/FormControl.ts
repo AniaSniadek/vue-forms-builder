@@ -1,4 +1,4 @@
-import type { ValidationErrors, ValidatorFunction } from './Validators'
+import { ValidationErrors, ValidatorFunction } from '../models'
 
 export class FormControl {
   private _value: any = null
