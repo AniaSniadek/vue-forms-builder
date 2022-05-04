@@ -1,0 +1,25 @@
+{
+  "name": "vue-forms-builder",
+  "version": "1.0.0",
+  "description": "Vue forms builder package",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AniaSniadek/vue-forms-builder.git"
+  },
+  "keywords": [],
+  "author": "Ania Śniadek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AniaSniadek/vue-forms-builder/issues"
+  },
+  "homepage": "https://github.com/AniaSniadek/vue-forms-builder#readme"
+}
