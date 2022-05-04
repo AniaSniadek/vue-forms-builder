@@ -20,11 +20,11 @@ const form = ref(
     phone: [null, [Validators.required, Validators.maxLength(10)]],
     consent: FormBuilder.group({
       phoneContact: [false, Validators.requiredTrue],
-      mailContact: false
-    })
-  })
-)
-const control = ref(FormBuilder.control(null, Validators.required))
+      mailContact: false,
+    }),
+  }),
+);
+const control = ref(FormBuilder.control(null, Validators.required));
 ```
 
 ### Use form in html
@@ -104,4 +104,4 @@ For bugs and questions [please create an issue](https://github.com/AniaSniadek/v
 ## License
 
 Copyright © 2022, [Anna Śniadek](https://github.com/AniaSniadek).
-Released under the [MIT license](https://github.com/AniaSniadek/vue-forms-builder/LICENSE).
+Released under the [MIT license](https://github.com/AniaSniadek/vue-forms-builder/blob/main/LICENCE).
