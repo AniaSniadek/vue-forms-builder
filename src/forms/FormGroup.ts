@@ -107,7 +107,7 @@ export class FormGroup {
   }
 
   /**
-   * Remove a control to this group
+   * Remove a control from this group
    * @param name - name of a control to be removed
    */
   removeControl(name: string): void {

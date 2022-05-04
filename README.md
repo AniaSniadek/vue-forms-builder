@@ -42,9 +42,9 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 #### Properties
 
-- `touched`: `boolean` - the default is false.
-- `valid`: `boolean` - the default is true.
-- `errors`: `ValidationErrors` - the default is an empty object.
+- `touched`: `boolean` - the default value is false.
+- `valid`: `boolean` - the default value is true.
+- `errors`: `ValidationErrors` - the default value is an empty object.
 
 #### Events
 
@@ -73,8 +73,8 @@ const control = ref(FormBuilder.control(null, Validators.required));
 - `patchValue(value: { [key: string]: any })`: `void` - patches the value of this group.
 - `reset()`: `void` - resets all the controls in this group to the initial value, setting all of it as untouched, resetting errors and setting validators to the initial value.
 - `addControl(name: string, control: FormControl | FormGroup)`: `void` - add a control to this group.
-- `removeControl(name: string)`: `void` - remove a control to this group.
-- `contains(name: string)`: `void` - remove a control to this group.
+- `removeControl(name: string)`: `void` - remove a control from this group.
+- `contains(name: string)`: `void` - check if this group contains a specific control.
 
 ### FormBuilder
 
