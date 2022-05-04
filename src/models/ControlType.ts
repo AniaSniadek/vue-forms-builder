@@ -1,5 +1,5 @@
-import { FormControl, FormGroup } from '../forms'
+import { FormControl, FormGroup } from '../forms';
 
 export type ControlType = {
-  [key: string]: FormControl | FormGroup
-}
+  [key: string]: FormControl | FormGroup;
+};

@@ -1,20 +1,20 @@
-import { ValidationErrors, ValidatorFunction } from '../models'
+import { ValidationErrors, ValidatorFunction } from '../models';
 
 export class FormControl {
-  private _value: any = null
-  private _cachedValue: any
-  private _validators: ValidatorFunction[] = []
-  touched = false
-  valid = true
-  errors: ValidationErrors = {}
+  private _value: any = null;
+  private _cachedValue: any;
+  private _validators: ValidatorFunction[] = [];
+  touched = false;
+  valid = true;
+  errors: ValidationErrors = {};
 
   /**
    * Setter for the control value
    * @memberof FormControl
    */
   set value(value: any) {
-    this._value = value
-    this.markAsTouched()
+    this._value = value;
+    this.markAsTouched();
   }
 
   /**
@@ -23,7 +23,7 @@ export class FormControl {
    * @memberof FormControl
    */
   get value(): any {
-    return this._value
+    return this._value;
   }
 
   /**
@@ -31,16 +31,13 @@ export class FormControl {
    * @param value - value for the control
    * @param validators - validator or array of validators for the control
    */
-  constructor(
-    value: any,
-    validators?: ValidatorFunction[] | ValidatorFunction
-  ) {
-    this._value = value
-    this._cachedValue = JSON.parse(JSON.stringify(value))
+  constructor(value: any, validators?: ValidatorFunction[] | ValidatorFunction) {
+    this._value = value;
+    this._cachedValue = JSON.parse(JSON.stringify(value));
 
     if (validators) {
-      this._validators = validators instanceof Array ? validators : [validators]
-      this._validateControl()
+      this._validators = validators instanceof Array ? validators : [validators];
+      this._validateControl();
     }
   }
 
@@ -49,22 +46,24 @@ export class FormControl {
    * @param value - new value
    */
   setValue(value: any): void {
-    this.value = value
+    this.value = value;
   }
 
   /**
    * Marks the control as touched
    */
   markAsTouched(): void {
-    this.touched = true
-    this._validators.length && this._validateControl()
+    this.touched = true;
+    if (this._validators.length) {
+      this._validateControl();
+    }
   }
 
   /**
    * Marks the control as untouched
    */
   markAsUntouched(): void {
-    this.touched = false
+    this.touched = false;
   }
 
   /**
@@ -73,8 +72,8 @@ export class FormControl {
    * @param validators - new validator or array of validators
    */
   setValidators(validators: ValidatorFunction | ValidatorFunction[]): void {
-    this._validators = validators instanceof Array ? validators : [validators]
-    this._validateControl()
+    this._validators = validators instanceof Array ? validators : [validators];
+    this._validateControl();
   }
 
   /**
@@ -84,9 +83,9 @@ export class FormControl {
    */
   addValidators(validators: ValidatorFunction | ValidatorFunction[]): void {
     if (validators instanceof Array) {
-      this._validators = this._validators.concat(validators)
+      this._validators = this._validators.concat(validators);
     } else {
-      this._validators.push(validators)
+      this._validators.push(validators);
     }
   }
 
@@ -96,11 +95,9 @@ export class FormControl {
    */
   removeValidators(validators: ValidatorFunction | ValidatorFunction[]): void {
     if (validators instanceof Array) {
-      validators.forEach((validator: ValidatorFunction) =>
-        this._removeValidator(validator)
-      )
+      validators.forEach((validator: ValidatorFunction) => this._removeValidator(validator));
     } else {
-      this._removeValidator(validators)
+      this._removeValidator(validators);
     }
   }
 
@@ -110,14 +107,14 @@ export class FormControl {
    * @returns if validator exist returns true, if not returns false
    */
   hasValidator(validator: ValidatorFunction): boolean {
-    return this._validators.includes(validator)
+    return this._validators.includes(validator);
   }
 
   /**
    * Removes all validators from this control
    */
   clearValidators(): void {
-    this._validators = []
+    this._validators = [];
   }
 
   /**
@@ -126,8 +123,8 @@ export class FormControl {
    * @param errors - error to be set
    */
   setErrors(errors: ValidationErrors): void {
-    this.errors = errors
-    this.valid = false
+    this.errors = errors;
+    this.valid = false;
   }
 
   /**
@@ -136,7 +133,7 @@ export class FormControl {
    * @returns if error exist returns true, if not returns false
    */
   hasError(error: string): boolean {
-    return this.errors[error]
+    return this.errors[error];
   }
 
   /**
@@ -145,10 +142,10 @@ export class FormControl {
    * and setting validators to the initial value
    */
   reset(): void {
-    this.value = this._cachedValue
-    this.markAsUntouched()
-    this.valid = !this._validators.length
-    this.errors = {}
+    this.value = this._cachedValue;
+    this.markAsUntouched();
+    this.valid = !this._validators.length;
+    this.errors = {};
   }
 
   /**
@@ -156,18 +153,18 @@ export class FormControl {
    * and setting errors and control validity
    */
   private _validateControl(): void {
-    let isFound = false
-    this.errors = {}
+    let isFound = false;
+    this.errors = {};
     this._validators.forEach((validator: ValidatorFunction) => {
       if (!isFound) {
-        const errors: ValidationErrors | null = validator(this._value)
+        const errors: ValidationErrors | null = validator(this._value);
         if (errors) {
-          this.errors = errors
-          isFound = true
+          this.errors = errors;
+          isFound = true;
         }
       }
-    })
-    this.valid = Object.keys(this.errors).length === 0
+    });
+    this.valid = Object.keys(this.errors).length === 0;
   }
 
   /**
@@ -175,9 +172,9 @@ export class FormControl {
    * @param validator - validator to be removed
    */
   private _removeValidator(validator: ValidatorFunction): void {
-    const index: number = this._validators.indexOf(validator)
+    const index: number = this._validators.indexOf(validator);
     if (index > -1) {
-      this._validators.splice(index, 1)
+      this._validators.splice(index, 1);
     }
   }
 }

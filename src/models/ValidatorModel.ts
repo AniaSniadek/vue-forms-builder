@@ -1,6 +1,4 @@
 export type ValidationErrors = {
-  [key: string]: any
-}
-export interface ValidatorFunction {
-  (value: any): ValidationErrors | null
-}
+  [key: string]: any;
+};
+export type ValidatorFunction = (value: any) => ValidationErrors | null;

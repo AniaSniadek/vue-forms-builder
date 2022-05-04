@@ -1,8 +1,8 @@
-import { ControlType } from '../models'
-import { FormControl } from './FormControl'
+import { ControlType } from '../models';
+import { FormControl } from './FormControl';
 
 export class FormGroup {
-  controls: ControlType
+  controls: ControlType;
 
   /**
    * Getter for this group validaty
@@ -11,7 +11,7 @@ export class FormGroup {
    * @memberof FormGroup
    */
   get valid(): boolean {
-    return this._checkIsValid()
+    return this._checkIsValid();
   }
 
   /**
@@ -19,7 +19,7 @@ export class FormGroup {
    * @param controls - controls for the FormGroup
    */
   constructor(controls: ControlType) {
-    this.controls = controls
+    this.controls = controls;
   }
 
   /**
@@ -27,25 +27,21 @@ export class FormGroup {
    * @param controlName - name of the control
    * @returns if control exist returns it
    */
-  get(
-    controlName: string,
-    formGroup?: FormGroup
-  ): FormControl | FormGroup | undefined {
-    const controls: ControlType = formGroup?.controls || this.controls
-    const controlNameArray: string[] = controlName.split('.')
+  get(controlName: string, formGroup?: FormGroup): FormControl | FormGroup | undefined {
+    const controls: ControlType = formGroup?.controls || this.controls;
+    const controlNameArray: string[] = controlName.split('.');
 
     for (const control in controls) {
-      const controlElement: FormControl | FormGroup = controls[control]
+      if (controls.hasOwnProperty(control)) {
+        const controlElement: FormControl | FormGroup = controls[control];
 
-      if (control === controlNameArray[0]) {
-        if (controlNameArray.length === 1) {
-          return controlElement
-        } else {
-          controlNameArray.shift()
-          return this.get(
-            controlNameArray.join('.'),
-            controlElement as FormGroup
-          )
+        if (control === controlNameArray[0]) {
+          if (controlNameArray.length === 1) {
+            return controlElement;
+          } else {
+            controlNameArray.shift();
+            return this.get(controlNameArray.join('.'), controlElement as FormGroup);
+          }
         }
       }
     }
@@ -55,17 +51,17 @@ export class FormGroup {
    * Marks all the controls in this group as touched
    */
   markAllAsTouched(formGroup?: FormGroup): void {
-    const controls: ControlType = formGroup?.controls || this.controls
+    const controls: ControlType = formGroup?.controls || this.controls;
 
-    for (const control in controls) {
-      const controlElement: FormControl | FormGroup = controls[control]
+    Object.keys(controls).forEach((control: string) => {
+      const controlElement: FormControl | FormGroup = controls[control];
 
       if (controlElement instanceof FormControl) {
-        controlElement.markAsTouched()
+        controlElement.markAsTouched();
       } else if (controlElement instanceof FormGroup) {
-        this.markAllAsTouched(controlElement)
+        this.markAllAsTouched(controlElement);
       }
-    }
+    });
   }
 
   /**
@@ -75,9 +71,9 @@ export class FormGroup {
   patchValue(value: { [key: string]: any }): void {
     for (const key in value) {
       if (typeof value[key] === 'object') {
-        ;(this.get(key) as FormGroup)?.patchValue(value[key])
+        (this.get(key) as FormGroup)?.patchValue(value[key]);
       } else {
-        ;(this.get(key) as FormControl)?.setValue(value[key])
+        (this.get(key) as FormControl)?.setValue(value[key]);
       }
     }
   }
@@ -88,17 +84,17 @@ export class FormGroup {
    * and setting validators to the initial value
    */
   reset(formGroup?: FormGroup): void {
-    const controls: ControlType = formGroup?.controls || this.controls
+    const controls: ControlType = formGroup?.controls || this.controls;
 
-    for (const control in controls) {
-      const controlElement: FormControl | FormGroup = controls[control]
+    Object.keys(controls).forEach((control: string) => {
+      const controlElement: FormControl | FormGroup = controls[control];
 
       if (controlElement instanceof FormControl) {
-        controlElement.reset()
+        controlElement.reset();
       } else if (controlElement instanceof FormGroup) {
-        this.reset(controlElement)
+        this.reset(controlElement);
       }
-    }
+    });
   }
 
   /**
@@ -107,7 +103,7 @@ export class FormGroup {
    * @param control - control for the given name
    */
   addControl(name: string, control: FormControl | FormGroup): void {
-    this.controls[name] = control
+    this.controls[name] = control;
   }
 
   /**
@@ -115,7 +111,7 @@ export class FormGroup {
    * @param name - name of a control to be removed
    */
   removeControl(name: string): void {
-    delete this.controls[name]
+    delete this.controls[name];
   }
 
   /**
@@ -124,7 +120,7 @@ export class FormGroup {
    * @returns if control exist returns true, if not returns false
    */
   contains(name: string): boolean {
-    return this.controls[name] !== undefined
+    return this.controls[name] !== undefined;
   }
 
   /**
@@ -132,23 +128,23 @@ export class FormGroup {
    * @returns if all controls are valid returns true, if not return false
    */
   private _checkIsValid(formGroupControls?: ControlType): boolean {
-    const controls: ControlType = formGroupControls || this.controls
-    let formGroupObj: ControlType = {}
+    const controls: ControlType = formGroupControls || this.controls;
+    let formGroupObj: ControlType = {};
 
     for (const control in controls) {
-      const controlElement: FormControl | FormGroup = controls[control]
-      if (controlElement instanceof FormControl && !controlElement.valid) {
-        return false
-      } else if (controlElement instanceof FormGroup) {
-        formGroupObj = {
-          ...formGroupObj,
-          ...controlElement.controls
+      if (controls.hasOwnProperty(control)) {
+        const controlElement: FormControl | FormGroup = controls[control];
+        if (controlElement instanceof FormControl && !controlElement.valid) {
+          return false;
+        } else if (controlElement instanceof FormGroup) {
+          formGroupObj = {
+            ...formGroupObj,
+            ...controlElement.controls,
+          };
         }
       }
     }
 
-    return Object.keys(formGroupObj).length === 0
-      ? true
-      : this._checkIsValid(formGroupObj)
+    return Object.keys(formGroupObj).length === 0 ? true : this._checkIsValid(formGroupObj);
   }
 }
