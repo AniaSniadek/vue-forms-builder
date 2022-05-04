@@ -1,6 +1,6 @@
 # Vue forms builder
 
-Vue forms builder is a package for handling forms in Vue. It is written in Typescript. Its functionality provides handling of user input events from a view, validates user input and creates a form model. It works like Angular Forms, but it is a rather limited version and was written specifically for Vue.
+Vue forms builder is a package for handling forms in Vue. It is written in Typescript. Its functionality provides handling of user input events from a view, validates user input and creates a form model. It works similar to Angular Forms, but it is a rather limited version and was written specifically for Vue.
 
 ## Install
 
