@@ -32,6 +32,8 @@ const control = ref(FormBuilder.control(null, Validators.required))
 ```html
 <input type="text" v-model="form.get('phone').value" />
 <input type="checkbox" v-model="form.get('consent.phoneContact').value" />
+
+<input type="text" v-model="control.value" />
 ```
 
 ## API
