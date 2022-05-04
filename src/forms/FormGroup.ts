@@ -83,7 +83,7 @@ export class FormGroup {
   }
 
   /**
-   * Resets all the controls in this group to the initial value
+   * Resets all the controls in this group to the initial value,
    * setting all of it as untouched, resetting errors
    * and setting validators to the initial value
    */

@@ -140,7 +140,7 @@ export class FormControl {
   }
 
   /**
-   * Resets the control to the initial value
+   * Resets the control to the initial value,
    * setting it as untouched, resetting errors
    * and setting validators to the initial value
    */
