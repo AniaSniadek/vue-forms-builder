@@ -1,5 +1,5 @@
 import { ControlType } from './ControlType';
 import { ValidatorFunction } from './ValidatorModel';
-import { ValidationErrors } from './ValidatorModel';
+import { ValidationError } from './ValidatorModel';
 
-export { ControlType, ValidationErrors, ValidatorFunction };
+export { ControlType, ValidationError as ValidationError, ValidatorFunction };

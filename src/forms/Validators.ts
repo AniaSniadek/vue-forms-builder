@@ -1,4 +1,4 @@
-import { ValidationErrors, ValidatorFunction } from '../models';
+import { ValidationError, ValidatorFunction } from '../models';
 
 export class Validators {
   /**
@@ -7,7 +7,7 @@ export class Validators {
    * requirements, if not returns an error object with
    * required property as true
    */
-  static required = (value: any): ValidationErrors | null => {
+  static required = (value: any): ValidationError | null => {
     return !this._isEmpty(value) ? null : { required: true };
   };
 
@@ -17,7 +17,7 @@ export class Validators {
    * requirements, if not returns an error object with
    * required property as true
    */
-  static requiredTrue = (value: any): ValidationErrors | null => {
+  static requiredTrue = (value: any): ValidationError | null => {
     return value === true ? null : { required: true };
   };
 

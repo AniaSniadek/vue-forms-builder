@@ -1,4 +1,4 @@
-import { ValidationErrors, ValidatorFunction } from '../models';
+import { ValidationError, ValidatorFunction } from '../models';
 
 export class FormControl {
   private _value: any = null;
@@ -6,7 +6,7 @@ export class FormControl {
   private _validators: ValidatorFunction[] = [];
   touched = false;
   valid = true;
-  errors: ValidationErrors = {};
+  error: ValidationError = {};
 
   /**
    * Setter for the control value
@@ -118,12 +118,12 @@ export class FormControl {
   }
 
   /**
-   * Sets errors to this control
+   * Sets error to this control
    * It also set validation to be falsy
-   * @param errors - error to be set
+   * @param error - error to be set
    */
-  setErrors(errors: ValidationErrors): void {
-    this.errors = errors;
+  setError(error: ValidationError): void {
+    this.error = error;
     this.valid = false;
   }
 
@@ -133,38 +133,38 @@ export class FormControl {
    * @returns if error exist returns true, if not returns false
    */
   hasError(error: string): boolean {
-    return this.errors[error];
+    return this.error[error];
   }
 
   /**
    * Resets the control to the initial value,
-   * setting it as untouched, resetting errors
+   * setting it as untouched, resetting error
    * and setting validators to the initial value
    */
   reset(): void {
     this.value = this._cachedValue;
     this.markAsUntouched();
     this.valid = !this._validators.length;
-    this.errors = {};
+    this.error = {};
   }
 
   /**
    * Private method that checks if the control is valid
-   * and setting errors and control validity
+   * and setting error and control validity
    */
   private _validateControl(): void {
     let isFound = false;
-    this.errors = {};
+    this.error = {};
     this._validators.forEach((validator: ValidatorFunction) => {
       if (!isFound) {
-        const errors: ValidationErrors | null = validator(this._value);
-        if (errors) {
-          this.errors = errors;
+        const error: ValidationError | null = validator(this._value);
+        if (error) {
+          this.error = error;
           isFound = true;
         }
       }
     });
-    this.valid = Object.keys(this.errors).length === 0;
+    this.valid = Object.keys(this.error).length === 0;
   }
 
   /**

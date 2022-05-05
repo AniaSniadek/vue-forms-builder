@@ -1,4 +1,4 @@
-export type ValidationErrors = {
+export type ValidationError = {
   [key: string]: any;
 };
-export type ValidatorFunction = (value: any) => ValidationErrors | null;
+export type ValidatorFunction = (value: any) => ValidationError | null;

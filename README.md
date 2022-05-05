@@ -44,7 +44,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 - `touched`: `boolean` - the default value is false.
 - `valid`: `boolean` - the default value is true.
-- `errors`: `ValidationErrors` - the default value is an empty object.
+- `error`: `ValidationError` - the default value is an empty object.
 
 #### Events
 
@@ -56,9 +56,9 @@ const control = ref(FormBuilder.control(null, Validators.required));
 - `removeValidators(validators: ValidatorFunction | ValidatorFunction[])`: `void` - removes validators from this control.
 - `hasValidator(validator: ValidatorFunction)`: `boolean` - checks if validator exist in this control.
 - `clearValidators()`: `void` - removes all validators from this control.
-- `setErrors(errors: ValidationErrors)`: `void` - sets errors to this control. It also set validation to be falsy.
+- `setError(error: ValidationError)`: `void` - sets error to this control. It also set validation to be falsy.
 - `hasError(error: string)`: `boolean` - checks if the control have specified error.
-- `reset()`: `void` - resets the control to the initial value, setting it as untouched, resetting errors and setting validators to the initial value.
+- `reset()`: `void` - resets the control to the initial value, setting it as untouched, resetting error and setting validators to the initial value.
 
 ### FormGroup
 
@@ -71,7 +71,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 - `get(controlName: string)`: `FormControl | FormGroup | undefined` - returns FormControl or FormGroup by given name.
 - `markAllAsTouched()`: `void` - marks all the controls in this group as touched.
 - `patchValue(value: { [key: string]: any })`: `void` - patches the value of this group.
-- `reset()`: `void` - resets all the controls in this group to the initial value, setting all of it as untouched, resetting errors and setting validators to the initial value.
+- `reset()`: `void` - resets all the controls in this group to the initial value, setting all of it as untouched, resetting error and setting validators to the initial value.
 - `addControl(name: string, control: FormControl | FormGroup)`: `void` - add a control to this group.
 - `removeControl(name: string)`: `void` - remove a control from this group.
 - `contains(name: string)`: `void` - check if this group contains a specific control.
@@ -87,7 +87,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 #### Events
 
-All events returns `ValidationErrors` or `null`.
+All events returns `ValidationError` or `null`.
 
 - `required` - requires the control's value to be non-empty.
 - `requiredTrue` - requires the control's value to be true.
