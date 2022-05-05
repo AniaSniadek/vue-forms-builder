@@ -31,6 +31,11 @@ export class FormBuilder {
           ...formGroup,
           [control]: controlElement,
         };
+      } else if (controlElement instanceof Object && !(controlElement instanceof Array)) {
+        formGroup = {
+          ...formGroup,
+          [control]: this.group(controlElement),
+        };
       } else {
         if (controlElement instanceof Array && controlElement.length > 1) {
           value = controlElement[0];

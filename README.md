@@ -1,6 +1,6 @@
 # Vue forms builder
 
-Vue forms builder is a package for handling forms in Vue. It is written in Typescript. Its functionality provides handling of user input events from a view, validates user input and creates a form model. It works similar to Angular Forms, but it is a rather limited version and was written specifically for Vue.
+Vue forms builder is a package for handling forms in Vue. It is written in Typescript. Its functionality provides handling of user input events from a view, validates user input and creates a form model. The inspiration for this were Angular Forms, but it is a rather limited version and it was written specifically for Vue.
 
 ## Install
 
@@ -18,10 +18,10 @@ $ npm install vue-forms-builder --save
 const form = ref(
   FormBuilder.group({
     phone: [null, [Validators.required, Validators.maxLength(10)]],
-    consent: FormBuilder.group({
+    consent: {
       phoneContact: [false, Validators.requiredTrue],
       mailContact: false,
-    }),
+    },
   }),
 );
 const control = ref(FormBuilder.control(null, Validators.required));
