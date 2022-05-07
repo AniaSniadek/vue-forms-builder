@@ -97,9 +97,13 @@ All events returns `ValidationError` or `null`.
 - `minLength(minLength: number)` - requires the length of the control's value to be greater than or equal to the provided minimum length.
 - `maxLength(maxLength: number)` - requires the length of the control's value to be less than or equal to the provided maximum length.
 
+## Tests
+
+Everything is covered with unit tests written in [Jest](https://jestjs.io/).
+
 ## Questions and bugs
 
-For bugs or questions [please create an issue](https://github.com/AniaSniadek/vue-forms-builder/issues/new).
+For any bugs or questions [please create an issue](https://github.com/AniaSniadek/vue-forms-builder/issues/new).
 
 ## License
 
