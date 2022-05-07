@@ -78,7 +78,7 @@ export class Validators {
     return (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return value?.length >= minLength ? null : { minLength: true };
+      return value.toString().length >= minLength ? null : { minLength: true };
     };
   };
 
@@ -94,7 +94,7 @@ export class Validators {
     return (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return value.length <= maxLength ? null : { maxLength: true };
+      return value.toString().length <= maxLength ? null : { maxLength: true };
     };
   };
 

@@ -87,6 +87,7 @@ export class FormControl {
     } else {
       this._validators.push(validators);
     }
+    this._validateControl();
   }
 
   /**
@@ -99,6 +100,7 @@ export class FormControl {
     } else {
       this._removeValidator(validators);
     }
+    this._validateControl();
   }
 
   /**
@@ -107,7 +109,13 @@ export class FormControl {
    * @returns if validator exist returns true, if not returns false
    */
   hasValidator(validator: ValidatorFunction): boolean {
-    return this._validators.includes(validator);
+    let isFound: boolean = false;
+    this._validators.forEach((validatorItem: ValidatorFunction) => {
+      if (validatorItem.toString() === validator.toString()) {
+        isFound = true;
+      }
+    });
+    return isFound;
   }
 
   /**
@@ -115,6 +123,7 @@ export class FormControl {
    */
   clearValidators(): void {
     this._validators = [];
+    this._validateControl();
   }
 
   /**
@@ -153,7 +162,7 @@ export class FormControl {
    * and setting error and control validity
    */
   private _validateControl(): void {
-    let isFound = false;
+    let isFound: boolean = false;
     this.error = {};
     this._validators.forEach((validator: ValidatorFunction) => {
       if (!isFound) {

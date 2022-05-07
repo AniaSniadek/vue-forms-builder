@@ -4,7 +4,7 @@ import { FormControl } from './../FormControl';
 import { FormBuilder } from './../FormBuilder';
 
 describe('FormBuilder class', () => {
-  it('should created', () => {
+  it('should created FromBuilder class', () => {
     expect(new FormBuilder()).toBeTruthy();
   });
 
@@ -22,6 +22,7 @@ describe('FormBuilder class', () => {
 
     it('new FormControl value should have specific validator', () => {
       expect(control.hasValidator(Validators.required)).toBeTruthy();
+      expect(control.hasValidator(Validators.requiredTrue)).toBeFalsy();
     });
   });
 
