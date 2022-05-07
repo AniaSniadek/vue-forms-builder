@@ -99,7 +99,7 @@ All events returns `ValidationError` or `null`.
 
 ## Questions and bugs
 
-For bugs and questions [please create an issue](https://github.com/AniaSniadek/vue-forms-builder/issues/new).
+For bugs or questions [please create an issue](https://github.com/AniaSniadek/vue-forms-builder/issues/new).
 
 ## License
 
