@@ -1,7 +1,7 @@
 {
   "name": "vue-forms-builder",
   "version": "1.0.0",
-  "description": "Vue forms builder package",
+  "description": "Typescript forms builder package written specifically for Vue",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -23,7 +23,17 @@
     "type": "git",
     "url": "git+https://github.com/AniaSniadek/vue-forms-builder.git"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "form",
+    "forms",
+    "form-builder",
+    "validation",
+    "typescript",
+    "validator",
+    "form-control",
+    "form-group"
+  ],
   "author": "sniadek_ania",
   "license": "MIT",
   "bugs": {
