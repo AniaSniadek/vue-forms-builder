@@ -11,8 +11,8 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "test": "jest --config jestconfig.json",
-    "test-watch": "jest --config jestconfig.json --watchAll",
+    "test": "jest",
+    "test-watch": "jest --watchAll",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint"
   },
