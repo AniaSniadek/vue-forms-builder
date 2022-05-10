@@ -153,8 +153,7 @@ export class FormControl {
   reset(): void {
     this.value = this._cachedValue;
     this.markAsUntouched();
-    this.valid = !this._validators.length;
-    this.error = {};
+    this._validateControl();
   }
 
   /**
