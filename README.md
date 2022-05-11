@@ -1,6 +1,6 @@
-# Vue forms builder
+# Vue forms builder 🚀
 
-Vue forms builder is a package for handling forms in Vue. It is written in Typescript, but you don't need to install Typescript if you want to use this package in a Vue project. Its functionality provides handling of user input events from a view, validates user input and creates a form model. The inspiration for this were Angular Forms, but it is a rather limited version and it was written specifically for Vue.
+Vue forms builder is a package for handling forms in Vue 3. It is written in Typescript, but you don't need to install Typescript if you want to use this package in a Vue 3 project. Its functionality provides handling of user input events from a view, validates user input and creates a form model. The inspiration for this were Angular Forms, but it is a rather limited version and it was written specifically for Vue 3.
 
 ## Install
 
@@ -9,6 +9,10 @@ Install with [npm](https://www.npmjs.com/):
 ```sh
 $ npm install vue-forms-builder --save
 ```
+
+## Demo
+
+Watch the Vue project demo on [StackBlitz ⚡️](https://stackblitz.com/edit/vue-forms-builder-demo) or checkout it source code on [Github 🎓](https://github.com/AniaSniadek/vue-forms-builder-demo).
 
 ## Usage
 
@@ -24,7 +28,6 @@ const form = ref(
     },
   }),
 );
-const control = ref(FormBuilder.control(null, Validators.required));
 ```
 
 ### Use form in html
@@ -32,7 +35,17 @@ const control = ref(FormBuilder.control(null, Validators.required));
 ```html
 <input type="text" v-model="form.get('phone').value" />
 <input type="checkbox" v-model="form.get('consent.phoneContact').value" />
+```
 
+### Create a new control
+
+```js
+const control = ref(FormBuilder.control(null, Validators.required));
+```
+
+### Use control in html
+
+```html
 <input type="text" v-model="control.value" />
 ```
 
@@ -46,7 +59,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 - `valid`: `boolean` - the default value is true.
 - `error`: `ValidationError` - the default value is an empty object.
 
-#### Events
+#### Methods
 
 - `setValue(value: any)`: `void` - sets a new value for the control.
 - `markAsTouched()`: `void` - marks the control as touched.
@@ -66,7 +79,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 - `controls`: `ControlType` - controls of the group.
 
-#### Events
+#### Methods
 
 - `get(controlName: string)`: `FormControl | FormGroup | undefined` - returns FormControl or FormGroup by given name.
 - `markAllAsTouched()`: `void` - marks all the controls in this group as touched.
@@ -78,16 +91,16 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 ### FormBuilder
 
-#### Events
+#### Methods
 
 - `control(value: any, validators?: ValidatorFunction[] | ValidatorFunction)`: `FormControl` - construct a new FormControl instance.
 - `group(controls: { [key: string]: any })`: `FormGroup` - construct a new FormGroup instance.
 
 ### Validators
 
-#### Events
+#### Methods
 
-All events returns `ValidationError` or `null`.
+All methods returns `ValidationError` or `null`.
 
 - `required` - requires the control's value to be non-empty.
 - `requiredTrue` - requires the control's value to be true.
@@ -107,5 +120,5 @@ For any bugs or questions [please create an issue](https://github.com/AniaSniade
 
 ## License
 
-Copyright © 2022, [Anna Śniadek](https://github.com/AniaSniadek).
+Copyright © 2022, [Anna Śniadek 🔥](https://github.com/AniaSniadek).
 Released under the [MIT license](https://github.com/AniaSniadek/vue-forms-builder/blob/main/LICENCE).
