@@ -1,6 +1,6 @@
 {
   "name": "vue-forms-builder",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typescript forms builder package written specifically for Vue",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
