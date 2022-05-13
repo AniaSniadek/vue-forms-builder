@@ -28,12 +28,14 @@ export class Validators {
    * requirements, if not returns an error object with
    * pattern property as true
    */
-  static pattern = (pattern: RegExp): ValidatorFunction => {
-    return (value: any) => {
+  static pattern = (regex: RegExp): ValidatorFunction => {
+    const pattern: ValidatorFunction = (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return pattern.test(value) ? null : { pattern: true };
+      return regex.test(value) ? null : { pattern: true };
     };
+
+    return pattern;
   };
 
   /**
@@ -43,12 +45,14 @@ export class Validators {
    * requirements, if not returns an error object with min
    * property as true
    */
-  static min = (min: number): ValidatorFunction => {
-    return (value: any) => {
+  static min = (minValue: number): ValidatorFunction => {
+    const min: ValidatorFunction = (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return value >= min ? null : { min: true };
+      return value >= minValue ? null : { min: true };
     };
+
+    return min;
   };
 
   /**
@@ -58,12 +62,14 @@ export class Validators {
    * requirements, if not returns an error object with max
    * property as true
    */
-  static max = (max: number): ValidatorFunction => {
-    return (value: any) => {
+  static max = (maxValue: number): ValidatorFunction => {
+    const max: ValidatorFunction = (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return value <= max ? null : { max: true };
+      return value <= maxValue ? null : { max: true };
     };
+
+    return max;
   };
 
   /**
@@ -74,12 +80,14 @@ export class Validators {
    * requirements, if not returns an error object with
    * minLength property as true
    */
-  static minLength = (minLength: number): ValidatorFunction => {
-    return (value: any) => {
+  static minLength = (minLengthValue: number): ValidatorFunction => {
+    const minLength: ValidatorFunction = (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return value.toString().length >= minLength ? null : { minLength: true };
+      return value.toString().length >= minLengthValue ? null : { minLength: true };
     };
+
+    return minLength;
   };
 
   /**
@@ -90,12 +98,14 @@ export class Validators {
    * requirements, if not returns an error object with
    * maxLength property as true
    */
-  static maxLength = (maxLength: number): ValidatorFunction => {
-    return (value: any) => {
+  static maxLength = (maxLengthValue: number): ValidatorFunction => {
+    const maxLength: ValidatorFunction = (value: any) => {
       if (this._isEmpty(value)) return null;
 
-      return value.toString().length <= maxLength ? null : { maxLength: true };
+      return value.toString().length <= maxLengthValue ? null : { maxLength: true };
     };
+
+    return maxLength;
   };
 
   /**

@@ -109,13 +109,7 @@ export class FormControl {
    * @returns if validator exist returns true, if not returns false
    */
   hasValidator(validator: ValidatorFunction): boolean {
-    let isFound: boolean = false;
-    this._validators.forEach((validatorItem: ValidatorFunction) => {
-      if (validatorItem.toString() === validator.toString()) {
-        isFound = true;
-      }
-    });
-    return isFound;
+    return this._validators.some((validatorItem: ValidatorFunction) => validatorItem.name === validator.name);
   }
 
   /**
@@ -180,7 +174,9 @@ export class FormControl {
    * @param validator - validator to be removed
    */
   private _removeValidator(validator: ValidatorFunction): void {
-    const index: number = this._validators.indexOf(validator);
+    const index: number = this._validators.findIndex(
+      (validatorItem: ValidatorFunction) => validatorItem.name === validator.name,
+    );
     if (index > -1) {
       this._validators.splice(index, 1);
     }

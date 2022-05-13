@@ -7,7 +7,7 @@ Vue forms builder is a package for handling forms in Vue 3. It is written in Typ
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm install vue-forms-builder --save
+$ npm install vue-forms-builder
 ```
 
 ## Demo
@@ -100,15 +100,58 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 #### Methods
 
-All methods returns `ValidationError` or `null`.
+- `required`: `ValidationError | null` - requires the control's value to be non-empty.
+- `requiredTrue`: `ValidationError | null` - requires the control's value to be true.
+- `pattern(pattern: RegExp)`: `ValidatorFunction` - requires the control's value to match a regex pattern.
+- `min(min: number)`: `ValidatorFunction` - requires the control's value to be greater than or equal to the provided number.
+- `max(max: number)`: `ValidatorFunction` - requires the control's value to be less than or equal to the provided number.
+- `minLength(minLength: number)`: `ValidatorFunction` - requires the length of the control's value to be greater than or equal to the provided minimum length.
+- `maxLength(maxLength: number)`: `ValidatorFunction` - requires the length of the control's value to be less than or equal to the provided maximum length.
 
-- `required` - requires the control's value to be non-empty.
-- `requiredTrue` - requires the control's value to be true.
-- `pattern(pattern: RegExp)` - requires the control's value to match a regex pattern.
-- `min(min: number)` - requires the control's value to be greater than or equal to the provided number.
-- `max(max: number)` - requires the control's value to be less than or equal to the provided number.
-- `minLength(minLength: number)` - requires the length of the control's value to be greater than or equal to the provided minimum length.
-- `maxLength(maxLength: number)` - requires the length of the control's value to be less than or equal to the provided maximum length.
+## Custom Validators
+
+It is possible to create custom validators, but each validator should return type `ValidatorFunction` or `ValidationError | null`. Each method should also have a name, it cannot return anonymous functions.
+
+### First example
+
+The method checks if the given value has no white spaces
+
+```js
+export class CustomValidators {
+  static noWhiteSpace = (value: any): ValidationError | null => {
+    return !((value || '').trim().length === 0) ? null : { noWhiteSpace: true };
+  };
+}
+```
+
+Usage
+
+```js
+const nameControl = ref(FormBuilder.control(null, CustomValidators.noWhiteSpace));
+```
+
+### Second example with passing a value
+
+The method checks if the given value is contained in the specified array
+
+```js
+export class CustomValidators {
+  static arrayIncludes = (arrayOfValues: any[]): ValidatorFunction => {
+    const arrayIncludes: ValidatorFunction = (value: any) => {
+      return arrayOfValues.includes(value) ? null : { arrayIncludes: true };
+    };
+
+    return arrayIncludes;
+  };
+}
+```
+
+Usage
+
+```js
+const names: string[] = ['Joe', 'Anna', 'Mike'];
+const nameControl = ref(FormBuilder.control(null, CustomValidators.arrayIncludes(names)));
+```
 
 ## Tests
 
