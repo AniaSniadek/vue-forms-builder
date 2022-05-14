@@ -1,4 +1,5 @@
-import { ValidatorFunction, ControlType } from '../models';
+import { ValidatorFunction, ControlType, AbstractControl } from '../models';
+import { FormArray } from './FormArray';
 import { FormControl } from './FormControl';
 import { FormGroup } from './FormGroup';
 
@@ -26,7 +27,11 @@ export class FormBuilder {
     Object.keys(controls).forEach((control: string) => {
       const controlElement: any = controls[control];
 
-      if (controlElement instanceof FormGroup) {
+      if (
+        controlElement instanceof FormGroup ||
+        controlElement instanceof FormControl ||
+        controlElement instanceof FormArray
+      ) {
         formGroup = {
           ...formGroup,
           [control]: controlElement,
@@ -53,5 +58,9 @@ export class FormBuilder {
     });
 
     return new FormGroup(formGroup);
+  };
+
+  static array = (controls: AbstractControl[]): FormArray => {
+    return new FormArray(controls);
   };
 }
