@@ -27,7 +27,7 @@ export class FormControl {
   }
 
   /**
-   * Initialize the FormControl instance.
+   * Initialize the FormControl instance
    * @param value - value for the control
    * @param validators - validator or array of validators for the control
    */
