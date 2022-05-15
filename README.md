@@ -81,13 +81,34 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 #### Methods
 
-- `get(controlName: string)`: `FormControl | FormGroup | undefined` - returns FormControl or FormGroup by given name.
+- `valid`: `boolean` - returns controls validity.
+- `get(controlName: string)`: `AbstractControl | undefined` - returns FormControl or FormGroup by given name.
 - `markAllAsTouched()`: `void` - marks all the controls in this group as touched.
 - `patchValue(value: { [key: string]: any })`: `void` - patches the value of this group.
 - `reset()`: `void` - resets all the controls in this group to the initial value, setting all of it as untouched, resetting error and setting validators to the initial value.
-- `addControl(name: string, control: FormControl | FormGroup)`: `void` - add a control to this group.
+- `addControl(name: string, control: AbstractControl)`: `void` - add a control to this group.
 - `removeControl(name: string)`: `void` - remove a control from this group.
 - `contains(name: string)`: `void` - check if this group contains a specific control.
+
+### FormArray
+
+#### Properties
+
+- `controls`: `AbstractControl[]` - controls of the FormArray.
+
+#### Methods
+
+- `length`: `boolean` - returns length of controls.
+- `valid`: `boolean` - returns controls validity.
+- `at(index: number)`: `AbstractControl` - returns AbstractControl at the given index.
+- `push(control: AbstractControl)`: `void` - add a new control at the end of the array of controls.
+- `insert(index: number, control: AbstractControl)`: `void` - insert a new control at the given index in the array of controls.
+- `removeAt(index: number)`: `void` - remove control at the given index from the array of controls.
+- `setControl(index: number, control: AbstractControl)`: `void` - replace an existing control at the given index in the array of controls.
+- `reset()`: `void` - resets all the controls in this array to the initial value, setting all of it as untouched, resetting error and setting validators to the initial value.
+- `clear()`: `void` - remove all controls from this array.
+- `markAllAsTouched()`: `void` - marks all the controls in this array as touched.
+- `patchValue(values: any[])`: `void` - patches the value of this array.
 
 ### FormBuilder
 
@@ -95,6 +116,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 
 - `control(value: any, validators?: ValidatorFunction[] | ValidatorFunction)`: `FormControl` - construct a new FormControl instance.
 - `group(controls: { [key: string]: any })`: `FormGroup` - construct a new FormGroup instance.
+- `array(controls: AbstractControl[])`: `FormArray` - construct a new FormArray instance.
 
 ### Validators
 
@@ -149,7 +171,7 @@ export class CustomValidators {
 Usage
 
 ```js
-const names: string[] = ['Joe', 'Anna', 'Mike'];
+const names = ['Joe', 'Anna', 'Mike'];
 const nameControl = ref(FormBuilder.control(null, CustomValidators.arrayIncludes(names)));
 ```
 

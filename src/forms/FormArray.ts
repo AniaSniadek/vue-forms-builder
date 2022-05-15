@@ -90,7 +90,7 @@ export class FormArray {
   }
 
   /**
-   * Remove all controls from this FormArray
+   * Remove all controls from this array
    */
   clear(): void {
     this.controls.splice(0);
