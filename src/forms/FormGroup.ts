@@ -6,7 +6,7 @@ export class FormGroup {
   controls: ControlType;
 
   /**
-   * Getter for this group validaty
+   * Getter for controls validity
    * @readonly
    * @type {boolean}
    * @memberof FormGroup
@@ -16,7 +16,7 @@ export class FormGroup {
   }
 
   /**
-   * Initialize the FormGroup instance.
+   * Initialize the FormGroup instance
    * @param controls - controls for the FormGroup
    */
   constructor(controls: ControlType) {
@@ -24,9 +24,9 @@ export class FormGroup {
   }
 
   /**
-   * Returns FormControl or FormGroup by given name
+   * Get control by given name
    * @param controlName - name of the control
-   * @returns if control exist returns it
+   * @returns AbstractControl if exist, if not method returns undefined
    */
   get(controlName: string, formGroup?: FormGroup): AbstractControl | undefined {
     const controls: ControlType = formGroup?.controls || this.controls;

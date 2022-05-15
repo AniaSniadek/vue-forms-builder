@@ -60,6 +60,11 @@ export class FormBuilder {
     return new FormGroup(formGroup);
   };
 
+  /**
+   * Construct a new FormArray instance
+   * @param controls - controls for FromArray as AbstractControl array
+   * @returns new FormArray instance
+   */
   static array = (controls: AbstractControl[]): FormArray => {
     return new FormArray(controls);
   };
