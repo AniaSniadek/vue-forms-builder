@@ -49,6 +49,22 @@ const control = ref(FormBuilder.control(null, Validators.required));
 <input type="text" v-model="control.value" />
 ```
 
+### Create a new form array
+
+```js
+const formArray = ref(
+  FormBuilder.array([FormBuilder.control(null, Validators.required), FormBuilder.control(null, Validators.required)]),
+);
+```
+
+### Use form array in html
+
+```html
+<div v-for="(control, index) of arrayGroup.controls">
+  <input type="checkbox" v-model="(arrayControl.controls[index] as FormControl).value" />
+</div>
+```
+
 ## API
 
 ### FormControl
