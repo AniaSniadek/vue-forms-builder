@@ -4,8 +4,8 @@ export class FormControl {
   private _value: any = null;
   private _cachedValue: any;
   private _validators: ValidatorFunction[] = [];
-  touched = false;
-  valid = true;
+  touched: boolean = false;
+  valid: boolean = true;
   error: ValidationError = {};
 
   /**
