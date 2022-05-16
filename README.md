@@ -52,9 +52,7 @@ const control = ref(FormBuilder.control(null, Validators.required));
 ### Create a new form array
 
 ```js
-const formArray = ref(
-  FormBuilder.array([FormBuilder.control(null, Validators.required), FormBuilder.control(null, Validators.required)]),
-);
+const formArray = ref(FormBuilder.array([FormBuilder.control(null, Validators.required), FormBuilder.control(null)]));
 ```
 
 ### Use form array in html
