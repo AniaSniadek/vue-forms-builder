@@ -1,7 +1,4 @@
 import { AbstractControl } from '../models';
-import { FormControl } from './FormControl';
-import { FormGroup } from './FormGroup';
-
 export class FormArray {
   controls: AbstractControl[];
 
@@ -121,11 +118,7 @@ export class FormArray {
    */
   markAllAsTouched(): void {
     this.controls.forEach((control: AbstractControl) => {
-      if (control instanceof FormControl) {
-        control.markAsTouched();
-      } else {
-        control.markAllAsTouched();
-      }
+      control.markAllAsTouched();
     });
   }
 
@@ -135,11 +128,7 @@ export class FormArray {
    */
   patchValue(values: any[]): void {
     values.forEach((value: any, index: number) => {
-      if (value instanceof Object || value instanceof Array) {
-        (this.controls[index] as FormGroup | FormArray).patchValue(value);
-      } else {
-        (this.controls[index] as FormControl).setValue(value);
-      }
+      this.controls[index]?.patchValue(value);
     });
   }
 

@@ -50,6 +50,14 @@ export class FormControl {
   }
 
   /**
+   * Patches the value of the control
+   * @param value - new value
+   */
+  patchValue(value: any): void {
+    this.setValue(value);
+  }
+
+  /**
    * Marks the control as touched
    */
   markAsTouched(): void {
@@ -57,6 +65,13 @@ export class FormControl {
     if (this._validators.length) {
       this._validateControl();
     }
+  }
+
+  /**
+   * Marks the control as touched
+   */
+  markAllAsTouched(): void {
+    this.markAsTouched();
   }
 
   /**

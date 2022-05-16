@@ -1,7 +1,4 @@
 import { AbstractControl, ControlType } from '../models';
-import { FormArray } from './FormArray';
-import { FormControl } from './FormControl';
-
 export class FormGroup {
   controls: ControlType;
 
@@ -73,13 +70,7 @@ export class FormGroup {
    */
   markAllAsTouched(): void {
     Object.keys(this.controls).forEach((control: string) => {
-      const controlElement: AbstractControl = this.controls[control];
-
-      if (controlElement instanceof FormControl) {
-        controlElement.markAsTouched();
-      } else {
-        controlElement.markAllAsTouched();
-      }
+      this.controls[control].markAllAsTouched();
     });
   }
 
@@ -89,11 +80,7 @@ export class FormGroup {
    */
   patchValue(value: { [key: string]: any }): void {
     for (const key in value) {
-      if (value[key] instanceof Object || value[key] instanceof Array) {
-        (this.get(key) as FormGroup | FormArray)?.patchValue(value[key]);
-      } else {
-        (this.get(key) as FormControl)?.setValue(value[key]);
-      }
+      this.get(key)?.patchValue(value[key]);
     }
   }
 

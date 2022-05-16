@@ -79,7 +79,9 @@ const formArray = ref(
 
 - `value`: `any` - returns control value.
 - `setValue(value: any)`: `void` - sets a new value for the control.
+- `patchValue(value: any)`: `void` - patches the value of the control.
 - `markAsTouched()`: `void` - marks the control as touched.
+- `markAllAsTouched()`: `void` - marks the control as touched.
 - `markAsUntouched()`: `void` - marks the control as untouched.
 - `setValidators(validators: ValidatorFunction | ValidatorFunction[])`: `void` - sets validators to this control. If it has any validators, they will be overwritten.
 - `addValidators(validators: ValidatorFunction | ValidatorFunction[])`: `void` - add validators to this control. If it has any validators, they will be added to the existing ones.
