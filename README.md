@@ -52,16 +52,14 @@ const control = ref(FormBuilder.control(null, Validators.required));
 ### Create a new form array
 
 ```js
-const formArray = ref(
-  FormBuilder.array([FormBuilder.control(null, Validators.required), FormBuilder.control(null, Validators.required)]),
-);
+const formArray = ref(FormBuilder.array([FormBuilder.control(null, Validators.required), FormBuilder.control(null)]));
 ```
 
 ### Use form array in html
 
 ```html
 <div v-for="(control, index) of arrayGroup.controls">
-  <input type="checkbox" v-model="(arrayControl.controls[index] as FormControl).value" />
+  <input type="checkbox" v-model="arrayControl.controls[index].value" />
 </div>
 ```
 
@@ -77,8 +75,11 @@ const formArray = ref(
 
 #### Methods
 
+- `value`: `any` - returns control value.
 - `setValue(value: any)`: `void` - sets a new value for the control.
+- `patchValue(value: any)`: `void` - patches the value of the control.
 - `markAsTouched()`: `void` - marks the control as touched.
+- `markAllAsTouched()`: `void` - marks the control as touched.
 - `markAsUntouched()`: `void` - marks the control as untouched.
 - `setValidators(validators: ValidatorFunction | ValidatorFunction[])`: `void` - sets validators to this control. If it has any validators, they will be overwritten.
 - `addValidators(validators: ValidatorFunction | ValidatorFunction[])`: `void` - add validators to this control. If it has any validators, they will be added to the existing ones.
@@ -97,7 +98,9 @@ const formArray = ref(
 
 #### Methods
 
+- `value`: `any` - returns controls value as object of values.
 - `valid`: `boolean` - returns controls validity.
+- `touched`: `boolean` - returns true if the group is touched, false if not.
 - `get(controlName: string)`: `AbstractControl | undefined` - returns FormControl or FormGroup by given name.
 - `markAllAsTouched()`: `void` - marks all the controls in this group as touched.
 - `patchValue(value: { [key: string]: any })`: `void` - patches the value of this group.
@@ -115,7 +118,9 @@ const formArray = ref(
 #### Methods
 
 - `length`: `boolean` - returns length of controls.
+- `value`: `any[]` - returns controls value as array of values.
 - `valid`: `boolean` - returns controls validity.
+- `touched`: `boolean` - returns true if the array is touched, false if not.
 - `at(index: number)`: `AbstractControl` - returns AbstractControl at the given index.
 - `push(control: AbstractControl)`: `void` - add a new control at the end of the array of controls.
 - `insert(index: number, control: AbstractControl)`: `void` - insert a new control at the given index in the array of controls.

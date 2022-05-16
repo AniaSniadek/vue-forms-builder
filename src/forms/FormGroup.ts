@@ -1,9 +1,17 @@
 import { AbstractControl, ControlType } from '../models';
-import { FormArray } from './FormArray';
-import { FormControl } from './FormControl';
 
 export class FormGroup {
   controls: ControlType;
+
+  /**
+   * Getter for the controls value
+   * @readonly
+   * @type {*}
+   * @memberof FormGroup
+   */
+  get value(): any {
+    return this._getValueAsObject();
+  }
 
   /**
    * Getter for controls validity
@@ -13,6 +21,16 @@ export class FormGroup {
    */
   get valid(): boolean {
     return this._checkIsValid();
+  }
+
+  /**
+   * Getter for the group touched value
+   * @readonly
+   * @type {boolean}
+   * @memberof FormGroup
+   */
+  get touched(): boolean {
+    return this._checkIsTouched();
   }
 
   /**
@@ -53,13 +71,7 @@ export class FormGroup {
    */
   markAllAsTouched(): void {
     Object.keys(this.controls).forEach((control: string) => {
-      const controlElement: AbstractControl = this.controls[control];
-
-      if (controlElement instanceof FormControl) {
-        controlElement.markAsTouched();
-      } else {
-        controlElement.markAllAsTouched();
-      }
+      this.controls[control].markAllAsTouched();
     });
   }
 
@@ -68,13 +80,9 @@ export class FormGroup {
    * @param value - object that matches the structure of the group
    */
   patchValue(value: { [key: string]: any }): void {
-    for (const key in value) {
-      if (value[key] instanceof Object || value[key] instanceof Array) {
-        (this.get(key) as FormGroup | FormArray)?.patchValue(value[key]);
-      } else {
-        (this.get(key) as FormControl)?.setValue(value[key]);
-      }
-    }
+    Object.keys(value).forEach((key: string) => {
+      this.get(key)?.patchValue(value[key]);
+    });
   }
 
   /**
@@ -126,5 +134,36 @@ export class FormGroup {
       }
     }
     return valid;
+  }
+
+  /**
+   * Private method for getting controls as object of values
+   * @returns object of controls value
+   */
+  private _getValueAsObject(): any {
+    let valueObject: any = {};
+    Object.keys(this.controls).forEach((control: string) => {
+      valueObject = {
+        ...valueObject,
+        [control]: this.controls[control].value,
+      };
+    });
+
+    return valueObject;
+  }
+
+  /**
+   * Private method for checking touched of the controls in this group
+   * @returns true if any control in this group is touched, false if all controls are untouched.
+   */
+  private _checkIsTouched(): boolean {
+    let touched: boolean = false;
+    Object.keys(this.controls).forEach((control: string) => {
+      if (this.controls[control].touched) {
+        touched = true;
+      }
+    });
+
+    return touched;
   }
 }

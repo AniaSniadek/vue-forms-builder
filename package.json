@@ -1,6 +1,6 @@
 {
   "name": "vue-forms-builder",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Typescript forms builder package written specifically for Vue",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,8 +13,7 @@
     "lint": "tslint -p tsconfig.json",
     "test": "jest",
     "test-watch": "jest --watchAll",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint"
+    "prepare": "npm test && npm run lint && npm run build"
   },
   "repository": {
     "type": "git",

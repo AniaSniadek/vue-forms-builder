@@ -2,10 +2,10 @@ import { ValidationError, ValidatorFunction } from '../models';
 
 export class FormControl {
   private _value: any = null;
-  private _cachedValue: any;
+  private _defaultValue: any;
   private _validators: ValidatorFunction[] = [];
-  touched = false;
-  valid = true;
+  touched: boolean = false;
+  valid: boolean = true;
   error: ValidationError = {};
 
   /**
@@ -33,7 +33,7 @@ export class FormControl {
    */
   constructor(value: any, validators?: ValidatorFunction[] | ValidatorFunction) {
     this._value = value;
-    this._cachedValue = JSON.parse(JSON.stringify(value));
+    this._defaultValue = JSON.parse(JSON.stringify(value));
 
     if (validators) {
       this._validators = validators instanceof Array ? validators : [validators];
@@ -50,6 +50,14 @@ export class FormControl {
   }
 
   /**
+   * Patches the value of the control
+   * @param value - new value
+   */
+  patchValue(value: any): void {
+    this.setValue(value);
+  }
+
+  /**
    * Marks the control as touched
    */
   markAsTouched(): void {
@@ -57,6 +65,13 @@ export class FormControl {
     if (this._validators.length) {
       this._validateControl();
     }
+  }
+
+  /**
+   * Marks the control as touched
+   */
+  markAllAsTouched(): void {
+    this.markAsTouched();
   }
 
   /**
@@ -145,7 +160,7 @@ export class FormControl {
    * and setting validators to the initial value
    */
   reset(): void {
-    this.value = this._cachedValue;
+    this.value = this._defaultValue;
     this.markAsUntouched();
     this._validateControl();
   }
