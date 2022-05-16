@@ -61,7 +61,7 @@ const formArray = ref(
 
 ```html
 <div v-for="(control, index) of arrayGroup.controls">
-  <input type="checkbox" v-model="(arrayControl.controls[index] as FormControl).value" />
+  <input type="checkbox" v-model="arrayControl.controls[index].value" />
 </div>
 ```
 
@@ -77,6 +77,7 @@ const formArray = ref(
 
 #### Methods
 
+- `value`: `any` - returns control value.
 - `setValue(value: any)`: `void` - sets a new value for the control.
 - `markAsTouched()`: `void` - marks the control as touched.
 - `markAsUntouched()`: `void` - marks the control as untouched.
@@ -97,7 +98,9 @@ const formArray = ref(
 
 #### Methods
 
+- `value`: `any` - returns controls value as object of values.
 - `valid`: `boolean` - returns controls validity.
+- `touched`: `boolean` - returns true if the group is touched, false if not.
 - `get(controlName: string)`: `AbstractControl | undefined` - returns FormControl or FormGroup by given name.
 - `markAllAsTouched()`: `void` - marks all the controls in this group as touched.
 - `patchValue(value: { [key: string]: any })`: `void` - patches the value of this group.
@@ -115,7 +118,9 @@ const formArray = ref(
 #### Methods
 
 - `length`: `boolean` - returns length of controls.
+- `value`: `any[]` - returns controls value as array of values.
 - `valid`: `boolean` - returns controls validity.
+- `touched`: `boolean` - returns true if the array is touched, false if not.
 - `at(index: number)`: `AbstractControl` - returns AbstractControl at the given index.
 - `push(control: AbstractControl)`: `void` - add a new control at the end of the array of controls.
 - `insert(index: number, control: AbstractControl)`: `void` - insert a new control at the given index in the array of controls.

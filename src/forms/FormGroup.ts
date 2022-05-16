@@ -6,6 +6,16 @@ export class FormGroup {
   controls: ControlType;
 
   /**
+   * Getter for the controls value
+   * @readonly
+   * @type {*}
+   * @memberof FormGroup
+   */
+  get value(): any {
+    return this._getValueAsObject();
+  }
+
+  /**
    * Getter for controls validity
    * @readonly
    * @type {boolean}
@@ -13,6 +23,16 @@ export class FormGroup {
    */
   get valid(): boolean {
     return this._checkIsValid();
+  }
+
+  /**
+   * Getter for the group touched value
+   * @readonly
+   * @type {boolean}
+   * @memberof FormGroup
+   */
+  get touched(): boolean {
+    return this._checkIsTouched();
   }
 
   /**
@@ -126,5 +146,36 @@ export class FormGroup {
       }
     }
     return valid;
+  }
+
+  /**
+   * Private method for getting controls as object of values
+   * @returns object of controls value
+   */
+  private _getValueAsObject(): any {
+    let valueObject: any = {};
+
+    for (const control in this.controls) {
+      valueObject = {
+        ...valueObject,
+        [control]: this.controls[control].value,
+      };
+    }
+
+    return valueObject;
+  }
+
+  /**
+   * Private method for checking touched of the controls in this group
+   * @returns true if any control in this group is touched, false if all controls are untouched.
+   */
+  private _checkIsTouched(): boolean {
+    let touched: boolean = false;
+    for (const control in this.controls) {
+      if (this.controls[control].touched) {
+        touched = true;
+      }
+    }
+    return touched;
   }
 }
