@@ -1,4 +1,5 @@
 import { AbstractControl, ControlType } from '../models';
+
 export class FormGroup {
   controls: ControlType;
 
@@ -79,9 +80,9 @@ export class FormGroup {
    * @param value - object that matches the structure of the group
    */
   patchValue(value: { [key: string]: any }): void {
-    for (const key in value) {
+    Object.keys(value).forEach((key: string) => {
       this.get(key)?.patchValue(value[key]);
-    }
+    });
   }
 
   /**
@@ -141,13 +142,12 @@ export class FormGroup {
    */
   private _getValueAsObject(): any {
     let valueObject: any = {};
-
-    for (const control in this.controls) {
+    Object.keys(this.controls).forEach((control: string) => {
       valueObject = {
         ...valueObject,
         [control]: this.controls[control].value,
       };
-    }
+    });
 
     return valueObject;
   }
@@ -158,11 +158,12 @@ export class FormGroup {
    */
   private _checkIsTouched(): boolean {
     let touched: boolean = false;
-    for (const control in this.controls) {
+    Object.keys(this.controls).forEach((control: string) => {
       if (this.controls[control].touched) {
         touched = true;
       }
-    }
+    });
+
     return touched;
   }
 }
