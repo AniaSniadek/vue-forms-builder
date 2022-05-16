@@ -2,7 +2,7 @@ import { ValidationError, ValidatorFunction } from '../models';
 
 export class FormControl {
   private _value: any = null;
-  private _cachedValue: any;
+  private _defaultValue: any;
   private _validators: ValidatorFunction[] = [];
   touched: boolean = false;
   valid: boolean = true;
@@ -33,7 +33,7 @@ export class FormControl {
    */
   constructor(value: any, validators?: ValidatorFunction[] | ValidatorFunction) {
     this._value = value;
-    this._cachedValue = JSON.parse(JSON.stringify(value));
+    this._defaultValue = JSON.parse(JSON.stringify(value));
 
     if (validators) {
       this._validators = validators instanceof Array ? validators : [validators];
@@ -160,7 +160,7 @@ export class FormControl {
    * and setting validators to the initial value
    */
   reset(): void {
-    this.value = this._cachedValue;
+    this.value = this._defaultValue;
     this.markAsUntouched();
     this._validateControl();
   }
